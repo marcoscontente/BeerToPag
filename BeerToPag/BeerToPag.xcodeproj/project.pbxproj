@@ -14,7 +14,7 @@
 		8DADE6D9223EC0960096CEB3 /* ApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6D8223EC0960096CEB3 /* ApiClientTests.swift */; };
 		8DADE6DB223EC2970096CEB3 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DA223EC2970096CEB3 /* ApiClient.swift */; };
 		8DADE6DD223EC5410096CEB3 /* ApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DC223EC5410096CEB3 /* ApiSession.swift */; };
-		8DADE6DF223EC76C0096CEB3 /* Beers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DE223EC76C0096CEB3 /* Beers.swift */; };
+		8DADE6DF223EC76C0096CEB3 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DE223EC76C0096CEB3 /* Beer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +40,7 @@
 		8DADE6D8223EC0960096CEB3 /* ApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientTests.swift; sourceTree = "<group>"; };
 		8DADE6DA223EC2970096CEB3 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		8DADE6DC223EC5410096CEB3 /* ApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSession.swift; sourceTree = "<group>"; };
-		8DADE6DE223EC76C0096CEB3 /* Beers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beers.swift; sourceTree = "<group>"; };
+		8DADE6DE223EC76C0096CEB3 /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +132,7 @@
 		8DADE6D5223EC0620096CEB3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8DADE6DE223EC76C0096CEB3 /* Beers.swift */,
+				8DADE6DE223EC76C0096CEB3 /* Beer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,7 +249,7 @@
 				8DADE6DD223EC5410096CEB3 /* ApiSession.swift in Sources */,
 				8DADE6B3223EBE3E0096CEB3 /* AppDelegate.swift in Sources */,
 				8DADE6DB223EC2970096CEB3 /* ApiClient.swift in Sources */,
-				8DADE6DF223EC76C0096CEB3 /* Beers.swift in Sources */,
+				8DADE6DF223EC76C0096CEB3 /* Beer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
