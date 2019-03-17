@@ -10,11 +10,11 @@ import Foundation
 
 struct Beer: Codable {
     let name: String
-    let tagline: String
-    let description: String
+    let tagline: String?
+    let description: String?
     let imageURL: String
     let abv: String
-    let ibu: String
+    let ibu: String?
     
     enum CodingKeys: String, CodingKey {
         case name, tagline, description
