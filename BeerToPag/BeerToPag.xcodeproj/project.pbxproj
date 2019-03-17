@@ -11,6 +11,10 @@
 		8DADE6B8223EBE3E0096CEB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DADE6B6223EBE3E0096CEB3 /* Main.storyboard */; };
 		8DADE6BA223EBE420096CEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DADE6B9223EBE420096CEB3 /* Assets.xcassets */; };
 		8DADE6BD223EBE420096CEB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DADE6BB223EBE420096CEB3 /* LaunchScreen.storyboard */; };
+		8DADE6D9223EC0960096CEB3 /* ApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6D8223EC0960096CEB3 /* ApiClientTests.swift */; };
+		8DADE6DB223EC2970096CEB3 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DA223EC2970096CEB3 /* ApiClient.swift */; };
+		8DADE6DD223EC5410096CEB3 /* ApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DC223EC5410096CEB3 /* ApiSession.swift */; };
+		8DADE6DF223EC76C0096CEB3 /* Beers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DE223EC76C0096CEB3 /* Beers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +36,11 @@
 		8DADE6BE223EBE420096CEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DADE6C3223EBE420096CEB3 /* BeerToPagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerToPagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DADE6C9223EBE420096CEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DADE6D7223EC0950096CEB3 /* BeerToPagTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeerToPagTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		8DADE6D8223EC0960096CEB3 /* ApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientTests.swift; sourceTree = "<group>"; };
+		8DADE6DA223EC2970096CEB3 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		8DADE6DC223EC5410096CEB3 /* ApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSession.swift; sourceTree = "<group>"; };
+		8DADE6DE223EC76C0096CEB3 /* Beers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +82,12 @@
 		8DADE6B1223EBE3E0096CEB3 /* BeerToPag */ = {
 			isa = PBXGroup;
 			children = (
-				8DADE6D2223EBE610096CEB3 /* Supporting Files */,
 				8DADE6B6223EBE3E0096CEB3 /* Main.storyboard */,
+				8DADE6D6223EC06A0096CEB3 /* Views */,
+				8DADE6D5223EC0620096CEB3 /* Models */,
+				8DADE6D4223EC05B0096CEB3 /* ViewControllers */,
+				8DADE6D3223EC0510096CEB3 /* Network */,
+				8DADE6D2223EBE610096CEB3 /* Supporting Files */,
 			);
 			path = BeerToPag;
 			sourceTree = "<group>";
@@ -83,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				8DADE6C9223EBE420096CEB3 /* Info.plist */,
+				8DADE6D8223EC0960096CEB3 /* ApiClientTests.swift */,
+				8DADE6D7223EC0950096CEB3 /* BeerToPagTests-Bridging-Header.h */,
 			);
 			path = BeerToPagTests;
 			sourceTree = "<group>";
@@ -96,6 +111,37 @@
 				8DADE6BE223EBE420096CEB3 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8DADE6D3223EC0510096CEB3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8DADE6DA223EC2970096CEB3 /* ApiClient.swift */,
+				8DADE6DC223EC5410096CEB3 /* ApiSession.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8DADE6D4223EC05B0096CEB3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8DADE6D5223EC0620096CEB3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8DADE6DE223EC76C0096CEB3 /* Beers.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8DADE6D6223EC06A0096CEB3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +197,7 @@
 					};
 					8DADE6C2223EBE420096CEB3 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 						TestTargetID = 8DADE6AE223EBE3D0096CEB3;
 					};
 				};
@@ -199,7 +246,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DADE6DD223EC5410096CEB3 /* ApiSession.swift in Sources */,
 				8DADE6B3223EBE3E0096CEB3 /* AppDelegate.swift in Sources */,
+				8DADE6DB223EC2970096CEB3 /* ApiClient.swift in Sources */,
+				8DADE6DF223EC76C0096CEB3 /* Beers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DADE6D9223EC0960096CEB3 /* ApiClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +448,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H9FF7A6C8;
 				INFOPLIST_FILE = BeerToPagTests/Info.plist;
@@ -407,6 +459,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = stoneyourmarcos.BeerToPagTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BeerToPagTests/BeerToPagTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeerToPag.app/BeerToPag";
@@ -418,6 +472,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H9FF7A6C8;
 				INFOPLIST_FILE = BeerToPagTests/Info.plist;
@@ -428,6 +483,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = stoneyourmarcos.BeerToPagTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BeerToPagTests/BeerToPagTests-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeerToPag.app/BeerToPag";
