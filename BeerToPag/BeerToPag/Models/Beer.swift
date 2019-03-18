@@ -10,7 +10,7 @@ import Foundation
 
 typealias Beers = [Beer]
 
-struct Beer: Codable {
+struct Beer: Codable, Equatable {
     let name: String
     let tagline: String?
     let description: String?

@@ -28,6 +28,21 @@ class BeerListViewController: UIViewController {
         tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
+        registerCells()
+        loadData()
+    }
+    
+    private func registerCells() {
+        tableView.register(UINib(nibName: "BeerCell", bundle: nil),
+                           forCellReuseIdentifier: "BeerCell")
+    }
+    
+    private func loadData() {
+        ApiClient().fetchBeers { (responseBeers, error) in
+            for beer in responseBeers! {
+                self.beers.append(beer)
+            }
+        }
     }
 }
 
@@ -38,7 +53,8 @@ extension BeerListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BeerListCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BeerCell", for: indexPath) as! BeerCell
+        cell.configCell(with: beers[indexPath.row])
         return cell
     }
 }

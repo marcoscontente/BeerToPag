@@ -71,8 +71,8 @@ class BeerListViewControllerTests: XCTestCase {
     func test_CellForRow_DequeuesCellFromTableView() {
         let mockTableView = MockTableView()
         mockTableView.dataSource = sut
-        mockTableView.register(BeerListCell.self,
-                               forCellReuseIdentifier: "BeerListCell")
+        mockTableView.register(BeerCell.self,
+                               forCellReuseIdentifier: "BeerCell")
         
         let beer1 = Beer(name: "Name",
                          tagline: "Tagline",
@@ -87,6 +87,24 @@ class BeerListViewControllerTests: XCTestCase {
         XCTAssertTrue(mockTableView.cellGotDequeued)
     }
     
+    func test_CellForRow_CallsConfigCell() {
+        let mockTableView = MockTableView()
+        mockTableView.dataSource = sut
+        mockTableView.register(MockBeerCell.self, forCellReuseIdentifier: "BeerCell")
+        
+        let beer = Beer(name: "Name",
+                         tagline: "Tagline",
+                         description: "Description",
+                         imageURL: "www.beer.com",
+                         abv: "6.0",
+                         ibu: "60")
+        
+        sut.beers.append(beer)
+        mockTableView.reloadData()
+        
+        let cell = mockTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MockBeerCell
+        XCTAssertEqual(cell.catchedBeer, beer)
+    }
     
 }
 
@@ -97,6 +115,14 @@ extension BeerListViewControllerTests {
         override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
             cellGotDequeued = true
             return super.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        }
+    }
+    
+    class MockBeerCell: BeerCell {
+        var catchedBeer = Beer(name: "", tagline: nil, description: nil, imageURL: "", abv: "", ibu: nil)
+        
+        override func configCell(with beer: Beer) {
+            catchedBeer = beer
         }
     }
 }
