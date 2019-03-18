@@ -16,6 +16,9 @@
 		8DADE6DD223EC5410096CEB3 /* ApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DC223EC5410096CEB3 /* ApiSession.swift */; };
 		8DADE6DF223EC76C0096CEB3 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DE223EC76C0096CEB3 /* Beer.swift */; };
 		8DADE6E1223EE36D0096CEB3 /* BeerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6E0223EE36D0096CEB3 /* BeerTests.swift */; };
+		8DADE6E3223EE7EE0096CEB3 /* BeerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6E2223EE7EE0096CEB3 /* BeerListViewController.swift */; };
+		8DADE6E5223EE82E0096CEB3 /* BeerListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6E4223EE82E0096CEB3 /* BeerListViewControllerTests.swift */; };
+		8DADE6E7223EF0120096CEB3 /* BeerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6E6223EF0120096CEB3 /* BeerListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,9 @@
 		8DADE6DC223EC5410096CEB3 /* ApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSession.swift; sourceTree = "<group>"; };
 		8DADE6DE223EC76C0096CEB3 /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		8DADE6E0223EE36D0096CEB3 /* BeerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerTests.swift; sourceTree = "<group>"; };
+		8DADE6E2223EE7EE0096CEB3 /* BeerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewController.swift; sourceTree = "<group>"; };
+		8DADE6E4223EE82E0096CEB3 /* BeerListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewControllerTests.swift; sourceTree = "<group>"; };
+		8DADE6E6223EF0120096CEB3 /* BeerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 				8DADE6D8223EC0960096CEB3 /* ApiClientTests.swift */,
 				8DADE6D7223EC0950096CEB3 /* BeerToPagTests-Bridging-Header.h */,
 				8DADE6E0223EE36D0096CEB3 /* BeerTests.swift */,
+				8DADE6E4223EE82E0096CEB3 /* BeerListViewControllerTests.swift */,
 			);
 			path = BeerToPagTests;
 			sourceTree = "<group>";
@@ -128,6 +135,7 @@
 		8DADE6D4223EC05B0096CEB3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8DADE6E2223EE7EE0096CEB3 /* BeerListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -143,6 +151,7 @@
 		8DADE6D6223EC06A0096CEB3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8DADE6E6223EF0120096CEB3 /* BeerListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,8 +260,10 @@
 			files = (
 				8DADE6DD223EC5410096CEB3 /* ApiSession.swift in Sources */,
 				8DADE6B3223EBE3E0096CEB3 /* AppDelegate.swift in Sources */,
+				8DADE6E3223EE7EE0096CEB3 /* BeerListViewController.swift in Sources */,
 				8DADE6DB223EC2970096CEB3 /* ApiClient.swift in Sources */,
 				8DADE6DF223EC76C0096CEB3 /* Beer.swift in Sources */,
+				8DADE6E7223EF0120096CEB3 /* BeerListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DADE6D9223EC0960096CEB3 /* ApiClientTests.swift in Sources */,
+				8DADE6E5223EE82E0096CEB3 /* BeerListViewControllerTests.swift in Sources */,
 				8DADE6E1223EE36D0096CEB3 /* BeerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
