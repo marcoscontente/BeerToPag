@@ -20,7 +20,7 @@ class BeerCellTest: XCTestCase {
         let controller = storyboard.instantiateViewController(withIdentifier: "BeerListViewController") as! BeerListViewController
         _ = controller.view
         
-        tableView = controller.tableView
+        tableView = controller.beerTableView
         tableView.dataSource = dataSource
     
         cell = tableView?.dequeueReusableCell(withIdentifier: "BeerCell", for: IndexPath(row: 0, section: 0)) as? BeerCell
@@ -39,12 +39,12 @@ class BeerCellTest: XCTestCase {
     }
     
     func test_ConfigCell_SetsName() {
-        cell.configCell(with: Beer(name: "Buzz", tagline: nil, description: nil, imageURL: "", abv: "", ibu: nil))
+        cell.configCell(with: Beer(name: "Buzz", tagline: nil, description: nil, imageURL: "", abv: nil, ibu: nil))
         XCTAssertEqual(cell.nameLabel.text, "Buzz")
     }
     
     func test_ConfigCell_SetsABV() {
-        cell.configCell(with: Beer(name: "", tagline: nil, description: nil, imageURL: "", abv: "6.0", ibu: nil))
+        cell.configCell(with: Beer(name: "", tagline: nil, description: nil, imageURL: "", abv: 6.0, ibu: nil))
         XCTAssertEqual(cell.abvLabel.text, "6.0")
     }
 }

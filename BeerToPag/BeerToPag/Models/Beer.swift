@@ -11,14 +11,16 @@ import Foundation
 typealias Beers = [Beer]
 
 struct Beer: Codable, Equatable {
-    let name: String
+    let id: Int?
+    let name: String?
     let tagline: String?
     let description: String?
-    let imageURL: String
-    let abv: String
-    let ibu: String?
+    let imageURL: String?
+    let abv: Double?
+    let ibu: Double?
     
     enum CodingKeys: String, CodingKey {
+        case id
         case name, tagline, description
         case imageURL = "image_url"
         case abv, ibu

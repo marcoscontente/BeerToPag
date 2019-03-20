@@ -28,8 +28,9 @@ class ApiClientTests: XCTestCase {
         sut.session = mockURLSession
         
         //When
-        let completion = { (beers: [Beer]?, error: Error?) in }
-        sut.fetchBeers(onComplete: completion)
+        let completion = { Result<Beers>.self }
+        let result: Result<Beers>!
+//        sut.fetchBeers(onComplete: completion)
         
         //Then
         guard let url = mockURLSession.url else { XCTFail(); return }
@@ -48,10 +49,10 @@ class ApiClientTests: XCTestCase {
         //When
         let beerExpectation = expectation(description: "Beers")
         var catchedBeers: [Beer]? = []
-        sut.fetchBeers { response, error in
-            catchedBeers = response
-            beerExpectation.fulfill()
-        }
+//        sut.fetchBeers { response, error in
+//            catchedBeers = response
+//            beerExpectation.fulfill()
+//        }
         
         //Then
         waitForExpectations(timeout: 1) { (error) in
@@ -59,8 +60,8 @@ class ApiClientTests: XCTestCase {
             XCTAssertEqual(catchedBeers?.first?.tagline, "A Real Bitter Experience.")
             XCTAssertEqual(catchedBeers?.first?.description, "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.")
             XCTAssertEqual(catchedBeers?.first?.imageURL, "https://images.punkapi.com/v2/keg.png")
-            XCTAssertEqual(catchedBeers?.first?.abv, "4.5")
-            XCTAssertEqual(catchedBeers?.first?.ibu, "60")
+            XCTAssertEqual(catchedBeers?.first?.abv, 4.5)
+            XCTAssertEqual(catchedBeers?.first?.ibu, 60)
         }
     }
     
@@ -72,10 +73,10 @@ class ApiClientTests: XCTestCase {
         //When
         let errorExpectation = expectation(description: "Error")
         var catchedError: Error? = nil
-        sut.fetchBeers { (response, error) in
-            catchedError = error
-            errorExpectation.fulfill()
-        }
+//        sut.fetchBeers { (response, error) in
+//            catchedError = error
+//            errorExpectation.fulfill()
+//        }
         
         //Then
         waitForExpectations(timeout: 1) { (error) in
@@ -91,11 +92,17 @@ class ApiClientTests: XCTestCase {
         //When
         let errorExpectation = expectation(description: "Error")
         var catchedError: Error? = nil
-        sut.fetchBeers { (response, error) in
-            catchedError = error
-            errorExpectation.fulfill()
-        }
         
+//        sut.fetchBeers { (response) in
+//            switch response {
+//            case .success(_):
+//                XCTFail()
+//            case .failure (let error):
+//                catchedError = error
+//                errorExpectation.fulfill()
+//            }
+//        }
+
         //Then
         waitForExpectations(timeout: 1) { (error) in
             XCTAssertNotNil(catchedError)
@@ -112,10 +119,10 @@ class ApiClientTests: XCTestCase {
         //When
         let errorExpectation = expectation(description: "Error")
         var catchedError: Error? = nil
-        sut.fetchBeers { (response, error) in
-            catchedError = error
-            errorExpectation.fulfill()
-        }
+//        sut.fetchBeers { (response, error) in
+//            catchedError = error
+//            errorExpectation.fulfill()
+//        }
         
         //Then
         waitForExpectations(timeout: 1) { (error) in

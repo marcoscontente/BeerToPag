@@ -10,16 +10,14 @@ import UIKit
 
 extension UIImageView {
     
-    public func downloadImage(with urlString: String) {
+    public func downloadImage(with url: URL) {
         self.image = nil
         
-        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
-            
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
             guard error == nil else  {
                 debugPrint(error.debugDescription)
                 return
             }
-            
             DispatchQueue.main.async(execute: { () -> Void in
                 let image = UIImage(data: data!)
                 self.image = image

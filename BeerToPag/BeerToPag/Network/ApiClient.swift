@@ -8,29 +8,39 @@
 
 import Foundation
 
+enum Result<T> {
+    case success(T)
+    case failure(Error)
+}
+
 class ApiClient {
+    
     // Properties
     lazy var session: SessionProtocol = URLSession.shared
     
-    func fetchBeers(onComplete: @escaping (_ beers: [Beer]?, _ error: Error?) -> Void) {
-        guard let url  = URL(string: "https://api.punkapi.com/v2/beers") else { fatalError() }
+    func fetchBeers<T: Codable>(page: Int, onComplete: @escaping (Result<T>) -> Void) {
+        let url = URL(string: "https://api.punkapi.com/v2/beers")
         
-        session.dataTask(with: url) { data, response, error in
-            guard error == nil else  {
-                onComplete(nil, error)
-                return
+        let parameters: [String: String] = ["page": String(page)]
+
+        var components = URLComponents(url: url!, resolvingAgainstBaseURL: false)!
+        components.queryItems = parameters.map { URLQueryItem(name: $0, value: $1) }
+        
+        let request = URLRequest(url: components.url!)
+        
+        session.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                onComplete(.failure(error))
             }
-            guard let data = data else {
-                onComplete(nil, NetworkError.DataEmptyError)
-                return
-            }
-            
+
+            guard let data = data else { return }
+
             do {
-                let response = try JSONDecoder().decode(Beer.self, from: data)
-                onComplete([response], nil)
+                let response = try JSONDecoder().decode(T.self, from: data)
+                onComplete(.success(response))
             } catch {
-                onComplete(nil, error)
+                onComplete(.failure(error))
             }
-        }.resume()
+            }.resume()
     }
 }

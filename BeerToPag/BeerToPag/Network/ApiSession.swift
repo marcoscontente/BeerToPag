@@ -8,12 +8,8 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case DataEmptyError
-}
-
 protocol SessionProtocol {
-    func dataTask(with url:URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+    func dataTask(with url:URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
 }
 
 extension URLSession: SessionProtocol { }

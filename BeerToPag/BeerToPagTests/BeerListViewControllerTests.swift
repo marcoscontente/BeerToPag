@@ -13,6 +13,7 @@ class BeerListViewControllerTests: XCTestCase {
     
     var sut: BeerListViewController!
     var tableView = UITableView()
+    var mockTableView: MockTableView!
     
     override func setUp() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -21,23 +22,27 @@ class BeerListViewControllerTests: XCTestCase {
         sut = viewController as? BeerListViewController
         _ = sut.view
         tableView.dataSource = sut
+        
+        mockTableView = MockTableView()
+        mockTableView.dataSource = sut
+        mockTableView.register(MockBeerCell.self, forCellReuseIdentifier: "BeerCell")
     }
     
     func test_TableView_AfterViewDidLoad_IsNotNil() {
-        XCTAssertNotNil(sut.tableView)
+        XCTAssertNotNil(sut.beerTableView)
     }
     
     func test_LoadingView_SetsTableViewDataSource() {
-        XCTAssertTrue(sut.tableView.dataSource is BeerListViewController)
+        XCTAssertTrue(sut.beerTableView.dataSource is BeerListViewController)
     }
     
     func test_LoadingView_SetsTableViewDelegate() {
-        XCTAssertTrue(sut.tableView.delegate is BeerListViewController)
+        XCTAssertTrue(sut.beerTableView.delegate is BeerListViewController)
     }
     
     func test_LoadingView_SetsDataSourceAndDelegateToSameObject() {
-        XCTAssertEqual(sut.tableView.dataSource as? BeerListViewController,
-                       sut.tableView.delegate as? BeerListViewController)
+        XCTAssertEqual(sut.beerTableView.dataSource as? BeerListViewController,
+                       sut.beerTableView.delegate as? BeerListViewController)
     }
     
     func test_NumberOfSections_IsOne() {
@@ -50,8 +55,8 @@ class BeerListViewControllerTests: XCTestCase {
                          tagline: "Tagline",
                          description: "Description",
                          imageURL: "www.beer.com",
-                         abv: "6.0",
-                         ibu: "60")
+                         abv: 6.0,
+                         ibu: 60)
         sut.beers.append(beer1)
         
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), 1)
@@ -60,8 +65,8 @@ class BeerListViewControllerTests: XCTestCase {
                          tagline: "Tagline",
                          description: "Description",
                          imageURL: "www.beer.com",
-                         abv: "6.0",
-                         ibu: "60")
+                         abv: 6.0,
+                         ibu: 60)
         sut.beers.append(beer2)
         tableView.reloadData()
 
@@ -69,17 +74,12 @@ class BeerListViewControllerTests: XCTestCase {
     }
     
     func test_CellForRow_DequeuesCellFromTableView() {
-        let mockTableView = MockTableView()
-        mockTableView.dataSource = sut
-        mockTableView.register(BeerCell.self,
-                               forCellReuseIdentifier: "BeerCell")
-        
         let beer1 = Beer(name: "Name",
                          tagline: "Tagline",
                          description: "Description",
                          imageURL: "www.beer.com",
-                         abv: "6.0",
-                         ibu: "60")
+                         abv: 6.0,
+                         ibu: 60)
         sut.beers.append(beer1)
         mockTableView.reloadData()
         
@@ -88,16 +88,12 @@ class BeerListViewControllerTests: XCTestCase {
     }
     
     func test_CellForRow_CallsConfigCell() {
-        let mockTableView = MockTableView()
-        mockTableView.dataSource = sut
-        mockTableView.register(MockBeerCell.self, forCellReuseIdentifier: "BeerCell")
-        
         let beer = Beer(name: "Name",
                          tagline: "Tagline",
                          description: "Description",
                          imageURL: "www.beer.com",
-                         abv: "6.0",
-                         ibu: "60")
+                         abv: 6.0,
+                         ibu: 60)
         
         sut.beers.append(beer)
         mockTableView.reloadData()
@@ -105,6 +101,12 @@ class BeerListViewControllerTests: XCTestCase {
         let cell = mockTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MockBeerCell
         XCTAssertEqual(cell.catchedBeer, beer)
     }
+    
+    func test_BeerListViewController_HasTitle() {
+        let title = sut.navigationController?.title
+        XCTAssertEqual(title, sut.navigationController?.title)
+    }
+    
     
 }
 
@@ -119,7 +121,7 @@ extension BeerListViewControllerTests {
     }
     
     class MockBeerCell: BeerCell {
-        var catchedBeer = Beer(name: "", tagline: nil, description: nil, imageURL: "", abv: "", ibu: nil)
+        var catchedBeer = Beer(name: "", tagline: nil, description: nil, imageURL: "", abv: Double(), ibu: nil)
         
         override func configCell(with beer: Beer) {
             catchedBeer = beer
