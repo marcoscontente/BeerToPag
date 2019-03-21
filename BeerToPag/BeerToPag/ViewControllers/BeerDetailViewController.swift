@@ -76,12 +76,14 @@ class BeerDetailViewController: UIViewController {
         
         if let imageURL = beer.imageURL,
             let url = URL(string: imageURL) {
-            beerImageView.downloadImage(with: url)
-            activityIndicator.stopAnimating()
+            self.beerImageView.downloadImage(with: url)
+            self.activityIndicator.stopAnimating()
         } else {
-            beerImageView.image = UIImage(named: "beerPlaceholder")
-            activityIndicator.stopAnimating()
+            self.beerImageView.image = UIImage(named: "beerPlaceholder")
+            self.activityIndicator.stopAnimating()
+
         }
+        
     }
     
 }

@@ -19,6 +19,7 @@ class BeerCell: UITableViewCell {
     // MARK: Config cell
     func configCell(with beer: Beer) {
         activityIndicator.startAnimating()
+        
         let titleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Constants.titleFontSize,
                                                                                     weight: .bold)]
         let coloredBoldAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Constants.textFontSize,

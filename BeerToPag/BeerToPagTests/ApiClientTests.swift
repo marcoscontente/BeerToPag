@@ -28,9 +28,8 @@ class ApiClientTests: XCTestCase {
         sut.session = mockURLSession
         
         //When
-        let completion = { Result<Beers>.self }
         let result: Result<Beers>!
-//        sut.fetchBeers(onComplete: completion)
+        sut.fetchBeers(page: 1, onComplete: Result.success(Beers))
         
         //Then
         guard let url = mockURLSession.url else { XCTFail(); return }
