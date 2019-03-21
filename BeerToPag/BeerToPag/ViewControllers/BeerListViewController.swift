@@ -15,15 +15,16 @@ class BeerListViewController: UIViewController {
     
     // Properties
     private let kRowHeight: CGFloat = 140
-    private var page = 1
+    var pageNo = Int()
     
-    var beers: Beers = Beers() {
-        didSet {
-            DispatchQueue.main.async {
-                self.beerTableView.reloadData()
-            }
-        }
-    }
+    var beers = Beers()
+//    {
+//        didSet {
+//            DispatchQueue.main.async {
+//                self.beerTableView.reloadData()
+//            }
+//        }
+//    }
 
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -31,7 +32,7 @@ class BeerListViewController: UIViewController {
         beerTableView.delegate = self
         beerTableView.dataSource = self
         registerCell()
-        loadData()
+        loadBeers()
     }
     
     private func registerCell() {
@@ -40,8 +41,9 @@ class BeerListViewController: UIViewController {
         self.beerTableView.register(nib, forCellReuseIdentifier: "BeerCell")
     }
     
-    private func loadData() {
-        ApiClient().fetchBeers(page: page) { (response: Result<Beers>) in
+    private func loadBeers(in page: Int? = 1) {
+//        self.isDataLoading = false
+        ApiClient().fetchBeers(page: page!) { (response: Result<Beers>) in
             switch response {
             case .success(let beers):
                 self.beers.append(contentsOf: beers)
@@ -55,8 +57,12 @@ class BeerListViewController: UIViewController {
                           message: error.localizedDescription,
                           error: error)
             }
-            self.page += 1
         }
+    }
+    
+    private func loadMoreBeers() {
+        self.pageNo += 1
+        loadBeers(in: pageNo)
     }
 }
 
@@ -90,6 +96,15 @@ extension BeerListViewController: UITableViewDelegate {
             if let beer = sender as? Beer {
                 beerDetailsViewController.beerDetail = beer
             }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard beers.count > Int() else { return }
+        let lastIndex = beers.count - 1
+        if indexPath.item == lastIndex {
+            self.loadMoreBeers()
+            self.beerTableView.reloadData()
         }
     }
 }

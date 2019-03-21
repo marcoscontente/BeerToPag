@@ -21,7 +21,7 @@ class ApiClient {
     func fetchBeers<T: Codable>(page: Int, onComplete: @escaping (Result<T>) -> Void) {
         let url = URL(string: "https://api.punkapi.com/v2/beers")
         
-        let parameters: [String: String] = ["page": String(page)]
+        let parameters: [String: String] = ["page": "\(page)"]
 
         var components = URLComponents(url: url!, resolvingAgainstBaseURL: false)!
         components.queryItems = parameters.map { URLQueryItem(name: $0, value: $1) }
