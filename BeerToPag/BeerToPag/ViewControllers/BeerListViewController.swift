@@ -17,14 +17,13 @@ class BeerListViewController: UIViewController {
     private let kRowHeight: CGFloat = 140
     var pageNo = Int()
     
-    var beers = Beers()
-//    {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.beerTableView.reloadData()
-//            }
-//        }
-//    }
+    var beers = Beers() {
+        didSet {
+            DispatchQueue.main.async {
+                self.beerTableView.reloadData()
+            }
+        }
+    }
 
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -47,6 +46,9 @@ class BeerListViewController: UIViewController {
             switch response {
             case .success(let beers):
                 self.beers.append(contentsOf: beers)
+                if let noDuplicates = self.beers.noDuplicates() {
+                    self.beers = noDuplicates
+                }
                 DispatchQueue.main.async {
                     self.beerTableView.reloadData()
                 }

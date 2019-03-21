@@ -26,3 +26,19 @@ struct Beer: Codable, Equatable {
         case abv, ibu
     }
 }
+
+// MARK: Collection Extension - Remove Duplicates
+
+extension Collection {
+    func noDuplicates() -> Beers? {
+        let beers = (self as? Beers ?? [])
+        var result = Beers()
+        for beer in beers {
+            let hasDuplicates = result.filter({ $0.id == beer.id }).count > Int()
+            if !hasDuplicates {
+                result.append(beer)
+            }
+        }
+        return result
+    }
+}
