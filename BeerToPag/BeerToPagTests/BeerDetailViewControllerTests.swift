@@ -42,7 +42,4 @@ class BeerDetailViewControllerTests: XCTestCase {
     func test_HasImageView() {
         XCTAssertNotNil(sut.beerImageView)
     }
-    
-    
-    
 }

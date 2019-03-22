@@ -39,13 +39,13 @@ class BeerCellTest: XCTestCase {
     }
     
     func test_ConfigCell_SetsName() {
-//        cell.configCell(with: Beer(name: "Buzz", tagline: nil, description: nil, imageURL: "", abv: nil, ibu: nil))
+        cell.configCell(with: Beer(id: 1, name: "Buzz", tagline: nil, description: nil, imageURL: "", abv: nil, ibu: nil))
         XCTAssertEqual(cell.nameLabel.text, "Buzz")
     }
     
     func test_ConfigCell_SetsABV() {
-//        cell.configCell(with: Beer(name: "", tagline: nil, description: nil, imageURL: "", abv: 6.0, ibu: nil))
-        XCTAssertEqual(cell.abvLabel.text, "6.0")
+        cell.configCell(with: Beer(id: 1, name: "Buzz", tagline: nil, description: nil, imageURL: "", abv: 6.0, ibu: nil))
+        XCTAssertEqual(cell.abvLabel.text, "6.0% ABV")
     }
 }
 

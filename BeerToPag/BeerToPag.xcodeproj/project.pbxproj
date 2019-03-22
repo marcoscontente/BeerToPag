@@ -14,7 +14,6 @@
 		8DADE6B8223EBE3E0096CEB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DADE6B6223EBE3E0096CEB3 /* Main.storyboard */; };
 		8DADE6BA223EBE420096CEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DADE6B9223EBE420096CEB3 /* Assets.xcassets */; };
 		8DADE6BD223EBE420096CEB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DADE6BB223EBE420096CEB3 /* LaunchScreen.storyboard */; };
-		8DADE6D9223EC0960096CEB3 /* ApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6D8223EC0960096CEB3 /* ApiClientTests.swift */; };
 		8DADE6DB223EC2970096CEB3 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DA223EC2970096CEB3 /* ApiClient.swift */; };
 		8DADE6DD223EC5410096CEB3 /* ApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DC223EC5410096CEB3 /* ApiSession.swift */; };
 		8DADE6DF223EC76C0096CEB3 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DADE6DE223EC76C0096CEB3 /* Beer.swift */; };
@@ -54,7 +53,6 @@
 		8DADE6C3223EBE420096CEB3 /* BeerToPagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerToPagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DADE6C9223EBE420096CEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DADE6D7223EC0950096CEB3 /* BeerToPagTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeerToPagTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		8DADE6D8223EC0960096CEB3 /* ApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientTests.swift; sourceTree = "<group>"; };
 		8DADE6DA223EC2970096CEB3 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		8DADE6DC223EC5410096CEB3 /* ApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSession.swift; sourceTree = "<group>"; };
 		8DADE6DE223EC76C0096CEB3 /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				8DADE6C9223EBE420096CEB3 /* Info.plist */,
-				8DADE6D8223EC0960096CEB3 /* ApiClientTests.swift */,
 				8DADE6D7223EC0950096CEB3 /* BeerToPagTests-Bridging-Header.h */,
 				8DADE6E0223EE36D0096CEB3 /* BeerTests.swift */,
 				8DADE6E4223EE82E0096CEB3 /* BeerListViewControllerTests.swift */,
@@ -325,7 +322,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD0994422408A630028835D /* StoryboardTests.swift in Sources */,
-				8DADE6D9223EC0960096CEB3 /* ApiClientTests.swift in Sources */,
 				8DADE6E5223EE82E0096CEB3 /* BeerListViewControllerTests.swift in Sources */,
 				8DADE6E1223EE36D0096CEB3 /* BeerTests.swift in Sources */,
 				8DADE6EB223FCFB10096CEB3 /* BeerCellTests.swift in Sources */,
