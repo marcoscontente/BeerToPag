@@ -18,6 +18,7 @@ class BeerCell: UITableViewCell {
     
     // MARK: Config cell
     func configCell(with beer: Beer) {
+        activityIndicator.style = .whiteLarge
         activityIndicator.startAnimating()
         
         let titleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Constants.titleFontSize,
@@ -41,11 +42,19 @@ class BeerCell: UITableViewCell {
         
         if let imageURL = beer.imageURL,
             let url = URL(string: imageURL) {
-            activityIndicator.stopAnimating()
-            beerImageView.downloadImage(with: url)
+                beerImageView.downloadImage(with: url) { image in
+                    DispatchQueue.main.async {
+                        self.beerImageView.image = image
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.hidesWhenStopped = true
+                    }
+                }
         } else {
-            activityIndicator.stopAnimating()
-            beerImageView.image = UIImage(named: "beerPlaceholder")
+            DispatchQueue.main.async {
+                self.beerImageView.image = UIImage(named: "beerPlaceholder")
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
+            }
         }
     }
 }

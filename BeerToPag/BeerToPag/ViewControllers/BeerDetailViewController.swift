@@ -31,9 +31,9 @@ class BeerDetailViewController: UIViewController {
     
     // MARK: - Layout methods
     fileprivate func setupView() {
+        activityIndicator.style = .whiteLarge
         activityIndicator.startAnimating()
         guard let beer = beerDetail else {
-            #warning(": Show NoData View")
             debugPrint("No beer")
             return
         }
@@ -76,14 +76,20 @@ class BeerDetailViewController: UIViewController {
         
         if let imageURL = beer.imageURL,
             let url = URL(string: imageURL) {
-            self.beerImageView.downloadImage(with: url)
-            self.activityIndicator.stopAnimating()
+            beerImageView.downloadImage(with: url) { image in
+                DispatchQueue.main.async {
+                    self.beerImageView.image = image
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidesWhenStopped = true
+                }
+            }
         } else {
-            self.beerImageView.image = UIImage(named: "beerPlaceholder")
-            self.activityIndicator.stopAnimating()
-
+            DispatchQueue.main.async {
+                self.beerImageView.image = UIImage(named: "beerPlaceholder")
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
+            }
         }
-        
     }
     
 }

@@ -23,44 +23,45 @@ class ApiClientTests: XCTestCase {
         mockURLSession = MockURLSession(data: nil, urlResponse: nil, error: nil)
     }
     
-    func test_ApiClient_ExpectedURL() {
-        //Given
-        sut.session = mockURLSession
-        
-        //When
-        let result: Result<Beers>!
-        sut.fetchBeers(page: 1, onComplete: Result.success(Beers))
-        
-        //Then
-        guard let url = mockURLSession.url else { XCTFail(); return }
-        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
-        XCTAssertEqual(urlComponents?.scheme, "https")
-        XCTAssertEqual(urlComponents?.host, "api.punkapi.com")
-        XCTAssertEqual(urlComponents?.path, "/v2/beers")
-    }
-    
     func test_ApiClient_WhenSuccessful_ReturnsBeer() {
         //Given
-        let jsonData = "{\"name\" : \"Buzz\", \"tagline\" : \"A Real Bitter Experience.\", \"description\" : \"A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.\", \"image_url\" : \"https://images.punkapi.com/v2/keg.png\", \"abv\" : \"4.5\", \"ibu\" : \"60\"}".data(using: .utf8)
+        let jsonData: [String: Any] = ["id" : 60,
+                                       name : "Buzz",
+                                       "tagline" : "A Real Bitter Experience.",
+                                       "description" : "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.",
+                                       "image_url" : "https://images.punkapi.com/v2/keg.png",
+                                       "abv" : "4.5",
+                                       "ibu" : "60"]
+            
+//            .data(using: .utf8)
+        
+//        let jsonData = TestBeer.beer()
         mockURLSession = MockURLSession(data: jsonData, urlResponse: nil, error: nil)
         sut.session = mockURLSession
         
         //When
         let beerExpectation = expectation(description: "Beers")
-        var catchedBeers: [Beer]? = []
-//        sut.fetchBeers { response, error in
-//            catchedBeers = response
-//            beerExpectation.fulfill()
-//        }
+        var catchedBeers: Beers = []
+        sut.fetchBeers(page: 1) { (response: Result<Beers>) in
+            switch response {
+            case .success(let beers):
+                catchedBeers = beers
+                beerExpectation.fulfill()
+            case .failure(let error):
+                debugPrint(response)
+                XCTFail(error.localizedDescription)
+            }
+        }
         
         //Then
         waitForExpectations(timeout: 1) { (error) in
-            XCTAssertEqual(catchedBeers?.first?.name, "Buzz")
-            XCTAssertEqual(catchedBeers?.first?.tagline, "A Real Bitter Experience.")
-            XCTAssertEqual(catchedBeers?.first?.description, "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.")
-            XCTAssertEqual(catchedBeers?.first?.imageURL, "https://images.punkapi.com/v2/keg.png")
-            XCTAssertEqual(catchedBeers?.first?.abv, 4.5)
-            XCTAssertEqual(catchedBeers?.first?.ibu, 60)
+            XCTAssertEqual(catchedBeers.first?.id, 1)
+            XCTAssertEqual(catchedBeers.first?.name, "Buzz")
+            XCTAssertEqual(catchedBeers.first?.tagline, "A Real Bitter Experience.")
+            XCTAssertEqual(catchedBeers.first?.description, "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.")
+            XCTAssertEqual(catchedBeers.first?.imageURL, "https://images.punkapi.com/v2/keg.png")
+            XCTAssertEqual(catchedBeers.first?.abv, 4.5)
+            XCTAssertEqual(catchedBeers.first?.ibu, 60)
         }
     }
     
@@ -72,6 +73,9 @@ class ApiClientTests: XCTestCase {
         //When
         let errorExpectation = expectation(description: "Error")
         var catchedError: Error? = nil
+//        sut.fetchBeers(page: 1) { (Result.success) in
+//            <#code#>
+//        }
 //        sut.fetchBeers { (response, error) in
 //            catchedError = error
 //            errorExpectation.fulfill()
@@ -132,14 +136,14 @@ class ApiClientTests: XCTestCase {
 
 extension ApiClientTests {
     class MockURLSession: SessionProtocol {
-        var url: URL?
+        var url: URLRequest?
         private let dataTask: MockDataTask
         
         init(data: Data?, urlResponse: URLResponse?, error: Error?) {
             dataTask = MockDataTask(data: data, urlResponse: urlResponse, error: error)
         }
-
-        func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        
+        func dataTask(with url: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
             self.url = url
             dataTask.completionHandler = completionHandler
             return dataTask
@@ -166,4 +170,8 @@ extension ApiClientTests {
             }
         }
     }
+}
+
+struct TestBeer {
+    static let beer = Beer(id: 1, name: "Buzz", tagline: "A Real Bitter Experience.", description: "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.", imageURL: "https://images.punkapi.com/v2/keg.png", abv: 4.5, ibu: 60)
 }

@@ -18,7 +18,7 @@ class ApiClient {
     // Properties
     lazy var session: SessionProtocol = URLSession.shared
     
-    func fetchBeers<T: Codable>(page: Int, onComplete: @escaping (Result<T>) -> Void) {
+    func fetchBeers<T: Codable>(in page: Int, onComplete: @escaping (Result<T>) -> Void) {
         let url = URL(string: "https://api.punkapi.com/v2/beers")
         
         let parameters: [String: String] = ["page": "\(page)"]

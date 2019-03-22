@@ -12,15 +12,15 @@ let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
     
-    public func downloadImage(with url: URL) {
-        self.image = nil
+    public func downloadImage(with url: URL, completion: @escaping (UIImage?) -> Void) {
         if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
-            self.image = imageFromCache
+            completion(imageFromCache)
             return
         }
         URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
             guard error == nil else  {
                 debugPrint(error.debugDescription)
+                completion(nil)
                 return
             }
             guard let data = data else { return }
@@ -28,10 +28,9 @@ extension UIImageView {
             DispatchQueue.main.async(execute: { () -> Void in
                 let image = UIImage(data: data)
                 imageCache.setObject(image!, forKey: url as AnyObject)
-                self.image = image
+                completion(image)
             })
         }).resume()
     }
 }
-
 

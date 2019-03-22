@@ -15,7 +15,8 @@ class BeerListViewController: UIViewController {
     
     // Properties
     private let kRowHeight: CGFloat = 140
-    var pageNo = Int()
+    private var isLoadingBeers: Bool = false
+    private var lastPageCalled: Int = 0
     
     var beers = Beers() {
         didSet {
@@ -30,28 +31,48 @@ class BeerListViewController: UIViewController {
         super.viewDidLoad()
         beerTableView.delegate = self
         beerTableView.dataSource = self
+        self.view.startLoading()
         registerCell()
-        loadBeers()
+        verifyInternetConnection()
     }
     
-    private func registerCell() {
+    fileprivate func registerCell() {
         let nib = UINib.init(nibName: "BeerCell",
                              bundle: Bundle(for: type(of: self)))
         self.beerTableView.register(nib, forCellReuseIdentifier: "BeerCell")
     }
     
-    private func loadBeers(in page: Int? = 1) {
-//        self.isDataLoading = false
-        ApiClient().fetchBeers(page: page!) { (response: Result<Beers>) in
+    fileprivate func verifyInternetConnection() {
+        if (!Reachability.isConnectedToNetwork()) {
+            self.view.stopLoading()
+            self.showError(title: "No Internet",
+                           message: "Please, check your internet connection.",
+                           error: nil,
+                           handler: { (UIAlertAction) in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                                self.verifyInternetConnection()
+                            }
+            })
+        } else {
+            loadBeers()
+        }
+    }
+    
+    fileprivate func loadBeers(in page: Int? = 1) {
+        self.isLoadingBeers = true
+        ApiClient().fetchBeers(in: page!) { (response: Result<Beers>) in
+            self.view.stopLoading()
             switch response {
             case .success(let beers):
                 self.beers.append(contentsOf: beers)
                 if let noDuplicates = self.beers.noDuplicates() {
                     self.beers = noDuplicates
                 }
+                self.lastPageCalled = page!
                 DispatchQueue.main.async {
                     self.beerTableView.reloadData()
                 }
+                self.isLoadingBeers = false
                 print(beers)
             case .failure(let error):
                 print(error)
@@ -62,9 +83,10 @@ class BeerListViewController: UIViewController {
         }
     }
     
-    private func loadMoreBeers() {
-        self.pageNo += 1
-        loadBeers(in: pageNo)
+    fileprivate func loadMoreBeers() {
+        let newBeerPage = self.lastPageCalled + 1
+        print("newBeerPage: \(newBeerPage)")
+        loadBeers(in: newBeerPage)
     }
 }
 
@@ -103,10 +125,12 @@ extension BeerListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard beers.count > Int() else { return }
-        let lastIndex = beers.count - 1
-        if indexPath.item == lastIndex {
+        let lastLines = beers.count - 5
+        if  (indexPath.item > lastLines && !self.isLoadingBeers) {
             self.loadMoreBeers()
-            self.beerTableView.reloadData()
+            DispatchQueue.main.async {
+                self.beerTableView.reloadData()
+            }
         }
     }
 }
